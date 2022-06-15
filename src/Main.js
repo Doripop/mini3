@@ -9,18 +9,27 @@ import western from "./image/동남아 음식.PNG";
 import southeastasia from "./image/양식.PNG";
 import china from "./image/중식.PNG";
 import myrecife from "./image/나만의 레시피.PNG";
+import { useDispatch } from "react-redux";
+import { signOut } from "./redux/module/login";
+
 
 function Main() {
   const Foods = ["한식", "중식", "양식", "일식", "동남아 음식"];
-
+  const dispatch = useDispatch()
   function random(n) {
     return Math.floor(Math.random() * n);
   }
-
+ 
   function generateRandomHand() {
     const idx = random(Foods.length);
     return Foods[idx];
   }
+
+  function LogOut(){
+    dispatch(signOut());
+    document.cookie = "JSESSIONID" + "=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
+  }
+  
 
   return (
     <Component>
@@ -35,6 +44,9 @@ function Main() {
           <Link to={"/login"}>
             <Btn>LOGIN</Btn>
           </Link>
+          {/* <Link to={"/login"}> */}
+            <Btn onClick={()=>{LogOut()}}>LOGOUT</Btn>
+          {/* </Link> */}
         </Btns>
         <div>
           <LogoImg src={logo} alt="" />

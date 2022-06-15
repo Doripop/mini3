@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { userCheck } from "./ userinfo";
 
 // const CREATE = "card/CREATE"
 const LOAD = "card/LOAD";
@@ -11,9 +11,6 @@ const LOGIN = "login/LOGIN";
 // ////////////////////////////
 // const LIKE = "card/LIKE"
 // // 1. 액션타입과 액션에 일치하는 명을 생성한다.
-
-
-
 
 const initialState = {
   list: [
@@ -61,16 +58,13 @@ export const signUP = (userInfo) => {
     axios
       .post("http://localhost:8080/user/register", userInfo)
       .then((response) => {
-        if (parseInt(response.data)===1) {
-          window.alert("회원가입이 완료되었습니다");
-          window.location.replace("/");
-        } else if(parseInt(response.data)===0) {
+        if (response.data == 1) {
+          window.alert("회원가입완료!");
+          window.location.replace("/")
+        } else {
           window.alert("중복된 id가 존재합니다");
-        }else{
-          console.log(response);
-          window.alert("죄송합니다!! 다시 시도해주세요")
         }
-        
+        console.log(response);
       });
   };
 };
@@ -78,14 +72,35 @@ export const signUP = (userInfo) => {
 export const logIn = (loginInfo) => {
   return function (dispacth) {
     axios
-      .post("http://localhost:8080/user/login", loginInfo)
+      .post("http://localhost:8080/user/login", loginInfo,{withCredentials: true})
       .then((response) => {
-        console.log(response);
+        if (response.data.result) {
+          window.alert("로그인 성공")
+          dispacth(userCheck(loginInfo.username))
+          window.location.replace("/")
+        } else {
+          window.alert("아이디와 비밀번호를 확인해주세요!")
+        }
+        console.log(response.data.result);
       });
   };
-
-  // console.log("대답")
 };
+  
+  // console.log("대답")
+
+export const signOut = () => {
+    return function (dispacth) {
+      axios
+        .post("http://localhost:8080/user/logout",{withCredentials: true})
+        .then((response) => {
+          response.data.result ? 
+          (window.alert("로그인 성공")) 
+          : (window.alert("너 이자식 누구야"))
+        
+          console.log(response.data.result);
+        });
+    };
+  };
 
 // export function likeCard(postid, post_idx, like) {
 //     return { type: LIKE, postid, post_idx, like }

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signUP } from "./redux/module/login";
 
+
 const Signup = () => {
   const reg_email =
     /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
@@ -58,6 +59,11 @@ const Signup = () => {
     } else {
       window.alert("기재하지 않은곳이 있는지 확인해주세요");
     }
+    ///////////////////////////////////////
+  
+
+
+
   };
 
   return (

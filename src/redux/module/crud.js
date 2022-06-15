@@ -38,7 +38,7 @@ export function recipeLOAD(recipe_list) {
 
 export const recipeLoadSV = () => {
   return async function (dispatch) {
-    await axios.get("http://localhost:5001//api/board").then((response) => {
+    await axios.get("http://localhost:8080/api/board").then((response) => {
       console.log(response);
 
       let recipe_list = [];
@@ -53,7 +53,7 @@ export const recipeLoadSV = () => {
 export const recipeUpload = (recipeInfo) => {
   return function (dispacth) {
     //   axios.post("http://api/board/write",recipeInfo)
-    axios.post("http://localhost:5001/recipe", recipeInfo).then((response) => {
+    axios.post("http://localhost:8080/api/board/write", recipeInfo,{'Content-Type': 'application/json', withCredentials: true}).then((response) => {
       console.log(response);
 
       const newrecipe = { id: response.id, ...recipeInfo };
@@ -74,7 +74,7 @@ export const recipeUpdate = (recipeRepair) => {
     // axios.put(`http://api/board/id:${recipeRepair.id}`,recipeRepair)
     console.log(recipeRepair);
     axios
-      .put(`http://api/board/id:${recipeRepair.id}`, recipeRepair)
+      .put(`http://localhost:8080/api/board/id:${recipeRepair.id}`, recipeRepair)
       .then((response) => {
         console.log(response);
       });
@@ -94,7 +94,7 @@ export const recipeDelete = (recipeDelete) => {
   return function (dispacth, getState) {
     // axios.delete(`http://api/board/id:${recipeDelete}`,recipeRepair)
     // console.log(recipeDelete);
-    axios.delete(`http://api/board/id:${recipeDelete}`).then((response) => {
+    axios.delete(`http://localhost:8080/api/board/id:${recipeDelete}`).then((response) => {
       console.log(response);
     });
 
