@@ -9,13 +9,7 @@ const UPDATE = "recipe/UPDATE";
 const LOAD = "recipe/LOAD";
 
 const initialState = {
-  list: [
-    { contents: "자장면 만들기", image: "", title: "자장면", id: 0 },
-    { contents: "라면 만들기", image: "", title: "자장면", id: 1 },
-    { contents: "떡볶이 만들기", image: "", title: "자장면", id: 2 },
-    { contents: "제육 만들기", image: "", title: "자장면", id: 3 },
-    { contents: "마라탕 만들기", image: "", title: "자장면", id: 4 },
-  ],
+  list: [],
 };
 
 export function recipeAdd(post) {
@@ -42,8 +36,9 @@ export const recipeLoadSV = () => {
       console.log(response);
 
       let recipe_list = [];
-      response.forEach((res) => {
-        recipe_list.push({ id: res.id, ...res.data() });
+      response.data.forEach((res) => {
+        recipe_list.push({ id: res.recipeId, ...res});
+        console.log(recipe_list);
         dispatch(recipeLOAD(recipe_list));
       });
     });
@@ -54,9 +49,9 @@ export const recipeUpload = (recipeInfo) => {
   return function (dispacth) {
     //   axios.post("http://api/board/write",recipeInfo)
     axios.post("http://localhost:8080/api/board/write", recipeInfo,{'Content-Type': 'application/json', withCredentials: true}).then((response) => {
-      console.log(response);
+      console.log(response.data);
 
-      const newrecipe = { id: response.id, ...recipeInfo };
+      const newrecipe = { id: response.data, ...recipeInfo };
       // console.log(newrecipe);
       dispacth(recipeAdd(newrecipe));
     });
@@ -74,7 +69,7 @@ export const recipeUpdate = (recipeRepair) => {
     // axios.put(`http://api/board/id:${recipeRepair.id}`,recipeRepair)
     console.log(recipeRepair);
     axios
-      .put(`http://localhost:8080/api/board/id:${recipeRepair.id}`, recipeRepair)
+      .put(`http://localhost:8080/api/board/${recipeRepair.id}`, recipeRepair)
       .then((response) => {
         console.log(response);
       });

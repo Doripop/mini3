@@ -12,8 +12,25 @@ import Japan from "./Japan";
 import Korean from "./Korean";
 import Western from "./Western";
 import SoutheastAsia from "./SoutheastAsia";
+import { useDispatch } from "react-redux";
+import React from "react";
+import { recipeLoadSV } from "./redux/module/crud";
+
+
+
+
+
 
 function App() {
+  
+  const dispatch = useDispatch()
+  React.useEffect(() => {
+    dispatch(recipeLoadSV());
+  }, [dispatch]);
+ 
+
+
+
   return (
     <div>
       <Routes>

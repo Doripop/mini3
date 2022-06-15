@@ -8,9 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { recipeDelete, recipeLoadSV } from "./redux/module/crud";
 
 function Detail() {
-  React.useEffect(() => {
-    dispatch(recipeLoadSV());
-  });
+ 
   const parm = useParams();
   console.log(parm.id);
   const navigate = useNavigate();

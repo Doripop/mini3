@@ -9,14 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { recipeLoadSV } from "./redux/module/crud";
 
 function MyRecife() {
-  React.useEffect(() => {
-    dispatch(recipeLoadSV());
-  });
+  
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const recipe_list = useSelector((state) => state.crud.list);
-  console.log(recipe_list);
+  // console.log(recipe_list);
 
   return (
     <Component>

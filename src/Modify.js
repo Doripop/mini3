@@ -49,7 +49,7 @@ function Modify() {
           title.current.value == ""
             ? recipe_list[recipe_idx].title
             : title.current.value,
-        id: recipe_list[recipe_idx].id,
+        id: parseInt(recipe_list[recipe_idx].id) ,
       })
     );
     navigate("/");
