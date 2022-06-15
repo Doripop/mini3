@@ -4,7 +4,7 @@
 
 
 const CHECK = "user/CHECK"
-
+const DELETE = "user/DELETE"
 
 const initialState = {
     list: [],
@@ -12,10 +12,14 @@ const initialState = {
 
 
   export function userCheck(user_id) {
-    console.log("이것도 안댕?", user_id)
+    // console.log("이것도 안댕?", user_id)
     return { type: CHECK, user_id };
   }
 
+  export function userDELETE() {
+    // console.log("이것도 안댕?", user_id)
+    return { type: CHECK };
+  }
 
 
 
@@ -24,7 +28,7 @@ export default function reducer(state = initialState, action = {}) {
 
         case "user/CHECK": {
             const new_user_list = [...state.list, {id : action.user_id}];
-            console.log("들어왔으면 제발 ", new_user_list)
+            // console.log("들어왔으면 제발 ", new_user_list)
             return { list: new_user_list };
           }
 

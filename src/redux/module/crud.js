@@ -48,7 +48,10 @@ export const recipeLoadSV = () => {
 export const recipeUpload = (recipeInfo) => {
   return function (dispacth) {
     //   axios.post("http://api/board/write",recipeInfo)
-    axios.post("http://localhost:8080/api/board/write", recipeInfo,{'Content-Type': 'application/json', withCredentials: true}).then((response) => {
+    axios.post("http://localhost:8080/api/board/write", recipeInfo, { 'Content-Type': 'application/json', withCredentials: true }).then((response) => {
+      if (response.data == null || undefined) {
+        window.alert("로그인한 사용자만 이용가능합니다")
+      }
       console.log(response.data);
 
       const newrecipe = { id: response.data, ...recipeInfo };
@@ -69,8 +72,14 @@ export const recipeUpdate = (recipeRepair) => {
     // axios.put(`http://api/board/id:${recipeRepair.id}`,recipeRepair)
     console.log(recipeRepair);
     axios
-      .put(`http://localhost:8080/api/board/${recipeRepair.id}`, recipeRepair)
+      .put(`http://localhost:8080/api/board/${recipeRepair.id}`, recipeRepair,{ 'Content-Type': 'application/json', withCredentials: true })
       .then((response) => {
+        if (response.data == 1) {
+          window.alert("수정완료!");
+        } else {
+          window.alert("작성자 이외에는 수정할 수 없습니다!");
+          window.location.replace("/myrecife");
+        }
         console.log(response);
       });
 
@@ -89,7 +98,13 @@ export const recipeDelete = (recipeDelete) => {
   return function (dispacth, getState) {
     // axios.delete(`http://api/board/id:${recipeDelete}`,recipeRepair)
     // console.log(recipeDelete);
-    axios.delete(`http://localhost:8080/api/board/id:${recipeDelete}`).then((response) => {
+    axios.delete(`http://localhost:8080/api/board/${recipeDelete}`,{ 'Content-Type': 'application/json', withCredentials: true }).then((response) => {
+      if (response.data == 1) {
+        window.alert("삭제완료!");
+      } else {
+        window.alert("작성자 이외에는 삭제할 수 없습니다.");
+        window.location.replace("/myrecife");
+      }
       console.log(response);
     });
 

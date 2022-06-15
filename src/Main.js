@@ -25,9 +25,8 @@ function Main() {
     return Foods[idx];
   }
 
-  function LogOut(){
+  const LogOut = () =>{
     dispatch(signOut());
-    document.cookie = "JSESSIONID" + "=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
   }
   
 
