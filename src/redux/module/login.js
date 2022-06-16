@@ -25,7 +25,7 @@ export const signUP = (userInfo) => {
   return function (dispacth) {
     //   axios.post("user/login", loginInfo)
     axios
-      .post("http://localhost:8080/user/register", userInfo)
+      .post("http://54.180.153.6/user/register", userInfo)
       .then((response) => {
         if (response.data == 1) {
           window.alert("회원가입완료!");
@@ -41,7 +41,7 @@ export const signUP = (userInfo) => {
 export const logIn = (loginInfo) => {
   return function (dispacth) {
     axios
-      .post("http://localhost:8080/user/login", loginInfo,{withCredentials: true})
+      .post("http://54.180.153.6/user/login", loginInfo,{withCredentials: true})
       .then((response) => {
         if (response.data.result) {
           window.alert("로그인 성공")
@@ -60,10 +60,10 @@ export const logIn = (loginInfo) => {
 export const signOut = () => {
     return function (dispacth) {
       axios
-        .post("http://localhost:8080/user/logout",{withCredentials: true})
+        .post("http://54.180.153.6/user/logout",{withCredentials: true})
         .then((response) => {
           response.data.result ? 
-          (window.alert("로그인 성공")) 
+          (window.alert("로그아웃 성공")) 
           : (window.alert("너 이자식 누구야"))
         
           console.log(response.data.result);
@@ -72,19 +72,19 @@ export const signOut = () => {
   };
 
 
-export const LoadRecipe = (menu) => {
-  console.log(menu);
-  return async function (dispacth) {
-    // axios.get("https://www.youtube.com/results?search_query=" , menu)
-    // axios.get("http://localhost:5001/api-board-write/")
-    axios
-      .get(`https://www.youtube.com/results?search_query=${menu}`)
-      .then((response) => {
-        console.log(response);
-        // dispacth(loadCard(response.data))
-      });
-  };
-};
+// export const LoadRecipe = (menu) => {
+//   console.log(menu);
+//   return async function (dispacth) {
+//     // axios.get("https://www.youtube.com/results?search_query=" , menu)
+//     // axios.get("http://localhost:5001/api-board-write/")
+//     axios
+//       .get(`https://www.youtube.com/results?search_query=${menu}`)
+//       .then((response) => {
+//         console.log(response);
+//         // dispacth(loadCard(response.data))
+//       });
+//   };
+// };
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {

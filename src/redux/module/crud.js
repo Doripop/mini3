@@ -32,7 +32,7 @@ export function recipeLOAD(recipe_list) {
 
 export const recipeLoadSV = () => {
   return async function (dispatch) {
-    await axios.get("http://localhost:8080/api/board").then((response) => {
+    await axios.get("http://54.180.153.6/api/board").then((response) => {
       console.log(response);
 
       let recipe_list = [];
@@ -48,7 +48,7 @@ export const recipeLoadSV = () => {
 export const recipeUpload = (recipeInfo) => {
   return function (dispacth) {
     //   axios.post("http://api/board/write",recipeInfo)
-    axios.post("http://localhost:8080/api/board/write", recipeInfo, { 'Content-Type': 'application/json', withCredentials: true }).then((response) => {
+    axios.post("http://54.180.153.6/api/board/write", recipeInfo, { 'Content-Type': 'application/json', withCredentials: true }).then((response) => {
       if (response.data == null || undefined) {
         window.alert("로그인한 사용자만 이용가능합니다")
       }
@@ -72,7 +72,7 @@ export const recipeUpdate = (recipeRepair) => {
     // axios.put(`http://api/board/id:${recipeRepair.id}`,recipeRepair)
     console.log(recipeRepair);
     axios
-      .put(`http://localhost:8080/api/board/${recipeRepair.id}`, recipeRepair,{ 'Content-Type': 'application/json', withCredentials: true })
+      .put(`http://54.180.153.6/api/board/${recipeRepair.id}`, recipeRepair,{ 'Content-Type': 'application/json', withCredentials: true })
       .then((response) => {
         if (response.data == 1) {
           window.alert("수정완료!");
@@ -98,7 +98,7 @@ export const recipeDelete = (recipeDelete) => {
   return function (dispacth, getState) {
     // axios.delete(`http://api/board/id:${recipeDelete}`,recipeRepair)
     // console.log(recipeDelete);
-    axios.delete(`http://localhost:8080/api/board/${recipeDelete}`,{ 'Content-Type': 'application/json', withCredentials: true }).then((response) => {
+    axios.delete(`http://54.180.153.6/api/board/${recipeDelete}`,{ 'Content-Type': 'application/json', withCredentials: true }).then((response) => {
       if (response.data == 1) {
         window.alert("삭제완료!");
       } else {
