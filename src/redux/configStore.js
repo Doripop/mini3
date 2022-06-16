@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 
 import login from "./module/login";
 import crud from "./module/crud";
-import userinfo from "./module/ userinfo"
+import userinfo from "./module/userinfo"
 
 const middlewares = [thunk];
 const enhencer = applyMiddleware(...middlewares); //미들웨어

@@ -4,6 +4,27 @@ import bob from "./image/밥그릇.png";
 import logo from "./image/오늘뭐먹지logo.png";
 
 function Chinese() {
+  const Foods = [
+    "짜장면",
+    "짬뽕",
+    "탕수육",
+    "마라탕",
+    "볶음밥",
+    "양꼬치",
+    "깐쇼새우",
+    "팔보채",
+    "깐풍기",
+  ];
+
+  function random(n) {
+    return Math.floor(Math.random() * n);
+  }
+
+  function generateRandomHand() {
+    const idx = random(Foods.length);
+    return Foods[idx];
+  }
+
   return (
     <Component>
       <Hd>
@@ -25,7 +46,7 @@ function Chinese() {
         </div>
 
         <Random>
-          오늘 <span>짜장면</span> 어때?
+          오늘 <span>{generateRandomHand()}</span> 어때?
         </Random>
       </Hd>
       <Boxes>
@@ -130,11 +151,15 @@ const Hd = styled.div`
   @media (max-width: 1024px) {
     //769px~1024px
     width: 768px;
+    height: 400px;
   }
   @media (max-width: 768px) {
     //~768px
     width: 100%;
+    height: 400px;
   }
+
+  height: 400px;
 `;
 
 const FoodImg = styled.img`
@@ -173,15 +198,18 @@ const Btn = styled.button`
 `;
 
 const Random = styled.h1`
-  text-align: center;
+  /* text-align: center; */
   margin-top: 100px;
   font-size: 60px;
+  /* display: flex; */
+  margin-left: 300px;
 `;
 
 const Boxes = styled.div`
   display: flex;
   margin-left: auto;
   margin-right: auto;
+  height: 210px;
 
   /* background-color: brown; */
   width: 1024px;
@@ -189,13 +217,13 @@ const Boxes = styled.div`
   @media (max-width: 1024px) {
     //769px~1024px
     width: 768px;
+    height: 210px;
   }
   @media (max-width: 768px) {
     //~768px
-    width: 100%;
+    width: 1024%;
   }
-
-  margin-top: 250px;
+  margin-top: 100px;
 `;
 
 const DivBox = styled.div`

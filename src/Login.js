@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 // import { useRef } from "react";
 import { logIn } from "./redux/module/login";
 import React from "react";
-import { userCheck } from "./redux/module/ userinfo";
+import { userCheck } from "./redux/module/userinfo";
 
 
 

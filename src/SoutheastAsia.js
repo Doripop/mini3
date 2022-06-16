@@ -46,7 +46,7 @@ function SoutheastAsia() {
         </div>
 
         <Random>
-          오늘 <span>쌀국수</span> 어때?
+          오늘 {generateRandomHand()} 어때?
         </Random>
       </Hd>
       <Boxes>
@@ -151,11 +151,15 @@ const Hd = styled.div`
   @media (max-width: 1024px) {
     //769px~1024px
     width: 768px;
+    height: 400px;
   }
   @media (max-width: 768px) {
     //~768px
     width: 100%;
+    height: 400px;
   }
+
+  height: 400px;
 `;
 
 const FoodImg = styled.img`
@@ -194,15 +198,18 @@ const Btn = styled.button`
 `;
 
 const Random = styled.h1`
-  text-align: center;
+  /* text-align: center; */
   margin-top: 100px;
   font-size: 60px;
+  /* display: flex; */
+  margin-left: 300px;
 `;
 
 const Boxes = styled.div`
   display: flex;
   margin-left: auto;
   margin-right: auto;
+  height: 210px;
 
   /* background-color: brown; */
   width: 1024px;
@@ -210,13 +217,13 @@ const Boxes = styled.div`
   @media (max-width: 1024px) {
     //769px~1024px
     width: 768px;
+    height: 210px;
   }
   @media (max-width: 768px) {
     //~768px
-    width: 100%;
+    width: 1024%;
   }
-
-  margin-top: 250px;
+  margin-top: 100px;
 `;
 
 const DivBox = styled.div`

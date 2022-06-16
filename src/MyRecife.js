@@ -7,6 +7,7 @@ import logo from "./image/오늘뭐먹지logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { recipeLoadSV } from "./redux/module/crud";
+import { signOut } from "./redux/module/login";
 
 function MyRecife() {
   
@@ -15,24 +16,46 @@ function MyRecife() {
   const dispatch = useDispatch();
   const recipe_list = useSelector((state) => state.crud.list);
   // console.log(recipe_list);
+  const LogOut = () => {
+    dispatch(signOut());
+    sessionStorage.clear();
+    window.location.replace("/");
+  }
 
   return (
     <Component>
       <Hd>
         <Link to={"/"}>
-          <div>
+          <div style={{display:"flex", justifyContent:"space-between"}}>
             <BobImg src={bob} alt="" />
+         
+        {!sessionStorage.getItem("username") ? (
+           <>
+           <div>
+             <Link to={"/signup"}>
+              <Btn>SIGNUP</Btn>
+            </Link>
+            <Link to={"/login"}>
+              <Btn>LOGIN</Btn>
+            </Link>
+           </div>
+           
+          </>) :
+          (<>
+          <div>
+            <Btns>
+              <Link to={"/add"}>
+                <Btn>ADD RECIPE</Btn>
+              </Link>
+                <Btn onClick={LogOut}>LOGOUT</Btn>
+            </Btns>
           </div>
+          </>)
+        }
+       </div>
         </Link>
 
-        <Btns>
-          <Link to={"/add"}>
-            <Btn>ADD RECIPE</Btn>
-          </Link>
-          <Link to={"/"}>
-            <Btn>LOGOUT</Btn>
-          </Link>
-        </Btns>
+
         <div>
           <LogoImg src={logo} alt="" />
         </div>
@@ -83,8 +106,9 @@ const Component = styled.div`
 `;
 
 const Btns = styled.div`
-  margin-left: 700px;
-  margin-top: -85px;
+    margin-left: 700px;
+    margin-top: 10px;
+    display: flex;
 `;
 
 const BobImg = styled.img`

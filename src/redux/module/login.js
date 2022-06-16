@@ -1,5 +1,5 @@
 import axios from "axios";
-import { userCheck } from "./ userinfo";
+import { userCheck } from "./userinfo";
 
 
 const LOAD = "card/LOAD";
@@ -39,13 +39,14 @@ export const signUP = (userInfo) => {
 };
 //////로그인////////////
 export const logIn = (loginInfo) => {
+  console.log(loginInfo);
   return function (dispacth) {
     axios
       .post("http://54.180.153.6/user/login", loginInfo,{withCredentials: true})
       .then((response) => {
         if (response.data.result) {
           window.alert("로그인 성공")
-          dispacth(userCheck(loginInfo.username))
+          sessionStorage.setItem("username", loginInfo.username);
           window.location.replace("/")
         } else {
           window.alert("아이디와 비밀번호를 확인해주세요!")

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import bob from "./image/밥그릇.png";
 import logo from "./image/오늘뭐먹지logo.png";
-import { useEffect } from "react";
 import korea from "./image/한식.PNG";
 import japan from "./image/일식.PNG";
 import southeastasia from "./image/동남아 음식.PNG";
@@ -19,16 +18,22 @@ function Main() {
   function random(n) {
     return Math.floor(Math.random() * n);
   }
- 
+
   function generateRandomHand() {
     const idx = random(Foods.length);
     return Foods[idx];
   }
 
-  const LogOut = () =>{
+  const LogOut = () => {
     dispatch(signOut());
+    sessionStorage.clear();
+    window.location.reload();
   }
-  
+
+
+
+
+  console.log(sessionStorage.getItem("username"));
 
   return (
     <Component>
@@ -37,16 +42,20 @@ function Main() {
           <BobImg src={bob} alt="" />
         </div>
         <Btns>
-          <Link to={"/signup"}>
-            <Btn>SIGNUP</Btn>
-          </Link>
-          <Link to={"/login"}>
-            <Btn>LOGIN</Btn>
-          </Link>
-          {/* <Link to={"/login"}> */}
-            <Btn onClick={()=>{LogOut()}}>LOGOUT</Btn>
-          {/* </Link> */}
+          {!sessionStorage.getItem("username") ? (
+            <>
+              <Link to={"/signup"}>
+                <Btn>SIGNUP</Btn>
+              </Link>
+              <Link to={"/login"}>
+                <Btn>LOGIN</Btn>
+              </Link>
+            </>
+          ) : (
+            <Btn onClick={() => { LogOut() }}>LOGOUT</Btn>
+          )}
         </Btns>
+
         <div>
           <LogoImg src={logo} alt="" />
         </div>
@@ -100,12 +109,6 @@ function Main() {
   );
 }
 
-const FoodImg = styled.img`
-  width: 200px;
-  height: 200px;
-  border-radius: 10px;
-`;
-
 const Hd = styled.div`
   display: block;
   margin-left: auto;
@@ -117,11 +120,21 @@ const Hd = styled.div`
   @media (max-width: 1024px) {
     //769px~1024px
     width: 768px;
+    height: 400px;
   }
   @media (max-width: 768px) {
     //~768px
     width: 100%;
+    height: 400px;
   }
+
+  height: 400px;
+`;
+
+const FoodImg = styled.img`
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
 `;
 
 const Component = styled.div`
@@ -154,15 +167,18 @@ const Btn = styled.button`
 `;
 
 const Random = styled.h1`
-  text-align: center;
+  /* text-align: center; */
   margin-top: 100px;
   font-size: 60px;
+  /* display: flex; */
+  margin-left: 300px;
 `;
 
 const Boxes = styled.div`
   display: flex;
   margin-left: auto;
   margin-right: auto;
+  height: 210px;
 
   /* background-color: brown; */
   width: 1024px;
@@ -170,13 +186,13 @@ const Boxes = styled.div`
   @media (max-width: 1024px) {
     //769px~1024px
     width: 768px;
+    height: 210px;
   }
   @media (max-width: 768px) {
     //~768px
-    width: 100%;
+    width: 1024%;
   }
-
-  margin-top: 250px;
+  margin-top: 150px;
 `;
 
 const DivBox = styled.div`
@@ -209,17 +225,9 @@ const Box = styled.div`
 `;
 
 const Text = styled.h1`
-  margin-top: -130px;
-  text-decoration: none;
+  margin-top: -125px;
   color: white;
+  text-decoration: none;
   text-shadow: 2px 2px 2px #000;
 `;
-
-const Texts = styled.h1`
-  margin-top: 80px;
-  text-decoration: none;
-  color: white;
-  text-shadow: 2px 2px 2px #000;
-`;
-
 export default Main;
